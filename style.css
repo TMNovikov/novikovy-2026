@@ -1,16 +1,25 @@
 /* === CSS Variables === */
 :root {
+    --font-script: 'Great Vibes', cursive;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Montserrat', sans-serif;
+    /* Цвета образцов ткани (дресс-код) — меняйте RGB по необходимости */
+    --swatch-1: rgb(33, 22, 24);
+    --swatch-2: rgb(99, 67, 59);
+    --swatch-3: rgb(118, 86, 73);
+    --swatch-4: rgb(206, 196, 189);
     --color-cream: #faf8f5;
     --color-ivory: #f5f0e8;
+    --color-envelope-gradient: #ebe4d8;
     --color-gold: #c9a962;
     --color-gold-dark: #a68b4b;
     --color-brown: #5c4a3a;
     --color-text: #3d3429;
     --color-text-light: #6b5d50;
-    --font-serif: 'Cormorant Garamond', Georgia, serif;
-    --font-sans: 'Montserrat', sans-serif;
     --shadow-soft: 0 4px 20px rgba(92, 74, 58, 0.08);
     --shadow-medium: 0 8px 40px rgba(92, 74, 58, 0.12);
+    --decor-hearts-hero: 3.6rem;
+    --decor-hearts-footer: 2.2rem;
 }
 
 /* === Reset & Base === */
@@ -44,13 +53,12 @@ body {
 /* === Envelope Screen === */
 .envelope-screen {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--color-ivory) 0%, #ebe4d8 100%);
+    background: linear-gradient(135deg, var(--color-ivory) 0%, var(--color-envelope-gradient) 100%);
     background-image: 
-        linear-gradient(135deg, var(--color-ivory) 0%, #ebe4d8 100%),
+        linear-gradient(135deg, var(--color-ivory) 0%, var(--color-envelope-gradient) 100%),
         radial-gradient(circle at 10% 10%, rgba(201, 169, 98, 0.06) 0%, transparent 40%);
     display: flex;
     align-items: center;
@@ -92,7 +100,7 @@ body {
 
 .envelope-img {
     display: block;
-    width: 840px;
+    width: 550px;
     height: auto;
     max-width: 95vw;
     border-radius: 4px;
@@ -121,7 +129,7 @@ body {
 
 /* Рукописный шрифт для имён */
 .envelope-names {
-    font-family: 'Great Vibes', cursive;
+    font-family: var(--font-script);
     font-size: 3.5rem;
     font-weight: 400;
     color: var(--color-brown);
@@ -131,6 +139,7 @@ body {
 .envelope-names .amp {
     display: inline-block;
     margin: 0 0.3rem;
+    font-size: 0.5em;
     color: var(--color-gold);
 }
 
@@ -160,7 +169,7 @@ body {
 
 .hero-title {
     font-family: var(--font-serif);
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-size: clamp(1.5rem, 3.75vw, 1.875rem);
     font-weight: 600;
     letter-spacing: 0.35em;
     color: var(--color-text-light);
@@ -185,7 +194,7 @@ body {
 
 .couple-names-script h2,
 .couple-names-script .amp-large {
-    font-family: 'Great Vibes', cursive;
+    font-family: var(--font-script);
     font-weight: 400;
 }
 
@@ -193,16 +202,11 @@ body {
     font-size: clamp(3rem, 7vw, 5rem);
 }
 
-.amp-large {
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-style: italic;
-    color: var(--color-gold);
-}
-
+.amp-large,
 .couple-names-script .amp-large {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-family: var(--font-script);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--color-gold);
 }
 
 .invitation-text {
@@ -216,6 +220,10 @@ body {
     padding: 1rem 2rem;
     border: 2px solid var(--color-gold);
     display: inline-block;
+}
+
+.date-block .date {
+    font-family: var(--font-sans);
 }
 
 .date {
@@ -253,9 +261,9 @@ body {
 .schedule-block h3,
 .venue-block h3,
 .dresscode-block h3 {
-    font-family: var(--font-serif);
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-family: var(--font-script);
+    font-size: 2.28rem;
+    font-weight: 400;
     color: var(--color-gold-dark);
     margin-bottom: 1.5rem;
     text-align: center;
@@ -265,27 +273,97 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    position: relative;
 }
 
-.schedule-item {
+.schedule-list::before {
+    content: '';
+    position: absolute;
+    left: calc(1rem + 48px);
+    top: calc(1.25rem + 48px);
+    bottom: calc(1.25rem + 48px);
+    width: 1px;
+    background: var(--color-gold);
+    opacity: 0.4;
+    z-index: 0;
+}
+
+.schedule-step {
     display: flex;
     align-items: flex-start;
-    gap: 1.5rem;
-    padding: 1rem;
+    gap: 1rem;
+    padding: 1.25rem 1rem;
     background: var(--color-cream);
-    border-radius: 4px;
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    position: relative;
+    z-index: 1;
 }
 
-.schedule-item .time {
+.details-section.visible .schedule-step {
+    animation: schedule-step-reveal 0.6s ease forwards;
+}
+
+.schedule-step:nth-child(1) { animation-delay: 0.1s; }
+.schedule-step:nth-child(2) { animation-delay: 0.3s; }
+.schedule-step:nth-child(3) { animation-delay: 0.5s; }
+
+@keyframes schedule-step-reveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.schedule-step .step-icon {
+    flex-shrink: 0;
+    width: 95px;
+    height: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(201, 169, 98, 0.2);
+    border-radius: 50%;
+    color: var(--color-gold-dark);
+}
+
+.schedule-step:first-child .step-icon {
+    color: #000000;
+    opacity:1;
+}
+
+.schedule-step:first-child .step-icon svg {
+    stroke-width: 0.8;
+}
+
+.schedule-step .step-icon svg {
+    width: 50px;
+    height: 50px;
+}
+
+.schedule-step .step-icon img {
+    width: 66px;
+    height: 66px;
+    object-fit: contain;
+}
+
+.schedule-step .step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.schedule-step .time {
     font-family: var(--font-serif);
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--color-gold);
-    min-width: 60px;
 }
 
-.schedule-item .event {
+.schedule-step .event {
     color: var(--color-text);
+    font-size: 1rem;
 }
 
 .venue-photo {
@@ -339,6 +417,43 @@ body {
     text-align: center;
 }
 
+.dresscode-swatches {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+/* Круглые образцы шёлковой ткани: фактура + цвет */
+.swatch {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background-image: url('./assets/silk-texture.png');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.swatch-1 {
+    background-color: var(--swatch-1);
+}
+.swatch-2 {
+    background-color: var(--swatch-2);
+}
+.swatch-3 {
+    background-color: var(--swatch-3);
+}
+.swatch-4 {
+    background-color: var(--swatch-4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
 /* Contacts Section */
 .contacts-section {
     padding: 4rem 1.5rem;
@@ -355,6 +470,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
+    font-style: normal;
 }
 
 .contact-item {
@@ -373,6 +489,13 @@ body {
     font-family: var(--font-serif);
     font-size: 1.25rem;
     font-weight: 600;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contact-item .phone:hover {
+    color: var(--color-gold);
 }
 
 .contact-item .role {
@@ -381,19 +504,40 @@ body {
     margin-top: 0.25rem;
 }
 
+.contacts-photos {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
+
+.contact-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: var(--shadow-soft);
+    border: 2px solid var(--color-ivory);
+}
+
 /* Footer */
 .footer {
     position: relative;
-    padding: 5rem 2rem;
+    padding: 3.35rem 1.35rem;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.35rem;
     color: var(--color-text-light);
     border-top: 2px solid var(--color-ivory);
 }
 
 .footer-names {
-    font-family: 'Great Vibes', cursive;
-    font-size: 3.5rem;
+    font-family: var(--font-script);
+    font-size: 2.35rem;
+}
+
+.footer-conjunction {
+    font-size: 0.5em;
 }
 
 /* === Countdown (первый экран) === */
@@ -449,47 +593,58 @@ body {
 }
 
 .decor-divider {
-    height: 40px;
+    height: 120px;
     margin: 0 auto;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'%3E%3Cpath fill='%23c9a962' opacity='0.4' d='M60 20 m-8 0 a 8 8 0 1 1 16 0 a 8 8 0 1 1 -16 0'/%3E%3Cpath fill='none' stroke='%23c9a962' stroke-width='0.8' opacity='0.5' d='M0 20 h50 M70 20 h50'/%3E%3Cpath fill='%23c9a962' opacity='0.3' d='M55 18 l5 4 -5 4 5 4'/%3E%3Cpath fill='%23c9a962' opacity='0.3' d='M65 18 l-5 4 5 4 -5 4'/%3E%3C/svg%3E") no-repeat center;
 }
 
+/* Ангелочки — после «Приглашаем на нашу свадьбу» */
+.hero-section {
+    position: relative;
+}
+
+.decor-cherubs-hero {
+    display: block;
+    width: 360px;
+    height: auto;
+    margin: 1.5rem auto;
+    opacity: 0.55;
+}
+
+.footer {
+    position: relative;
+}
+
+/* Декоративные сердечки */
 .decor-hearts {
     margin-top: 2rem;
     opacity: 0.3;
+    animation: float 4s ease-in-out infinite;
 }
 
-.decor-hearts-hero::before {
-    content: '♥';
-    font-size: 0.9rem;
-    color: var(--color-gold);
-    margin-right: 0.5rem;
-}
-
+.decor-hearts-hero::before,
 .decor-hearts-hero::after {
     content: '♥';
-    font-size: 0.9rem;
+    font-size: var(--decor-hearts-hero);
     color: var(--color-gold);
-    margin-left: 0.5rem;
 }
+
+.decor-hearts-hero::before { margin-right: 0.5rem; }
+.decor-hearts-hero::after { margin-left: 0.5rem; }
 
 .decor-hearts-footer {
     margin-bottom: 1rem;
 }
 
-.decor-hearts-footer::before {
-    content: '♥';
-    font-size: 1.1rem;
-    color: var(--color-gold);
-    margin-right: 0.5rem;
-}
-
+.decor-hearts-footer::before,
 .decor-hearts-footer::after {
     content: '♥';
-    font-size: 1.1rem;
+    font-size: var(--decor-hearts-footer);
     color: var(--color-gold);
-    margin-left: 0.5rem;
 }
+
+.decor-hearts-footer::before { margin-right: 0.5rem; }
+.decor-hearts-footer::after { margin-left: 0.5rem; }
 
 .decor-corner {
     position: absolute;
@@ -533,8 +688,8 @@ body {
     50% { transform: translateY(-5px); }
 }
 
-.decor-hearts {
-    animation: float 4s ease-in-out infinite;
+.decor-cherubs {
+    animation: float 5s ease-in-out infinite;
 }
 
 .countdown-value {
@@ -559,11 +714,11 @@ body {
     transform: scale(1.02);
 }
 
-.schedule-item {
+.schedule-step {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.schedule-item:hover {
+.schedule-step:hover {
     transform: translateX(4px);
     box-shadow: var(--shadow-soft);
 }
@@ -584,7 +739,7 @@ body {
     
     .envelope-img {
         width: 90vw;
-        max-width: 400px;
+        max-width: 200px;
     }
     
     .envelope-title,
@@ -602,8 +757,12 @@ body {
         padding: 2rem 1.25rem 3rem;
     }
     
+    .decor-cherubs-hero {
+        width: 300px;
+    }
+    
     .hero-title {
-        font-size: 0.9rem;
+        font-size: 1.35rem;
         letter-spacing: 0.2em;
         margin-bottom: 1.5rem;
     }
@@ -644,20 +803,20 @@ body {
     .schedule-block h3,
     .venue-block h3,
     .dresscode-block h3 {
-        font-size: 1.25rem;
+        font-size: 1.92rem;
     }
     
-    .schedule-item {
+    .schedule-step {
         padding: 0.875rem;
         gap: 1rem;
     }
     
-    .schedule-item .time {
+    .schedule-step .time {
         font-size: 1.1rem;
         min-width: 50px;
     }
     
-    .schedule-item .event {
+    .schedule-step .event {
         font-size: 0.95rem;
     }
     
@@ -688,12 +847,12 @@ body {
     }
     
     .footer {
-        padding: 3.5rem 1.5rem;
-        font-size: 1.5rem;
+        padding: 2.35rem 1rem;
+        font-size: 1rem;
     }
     
     .footer-names {
-        font-size: 2.5rem;
+        font-size: 1.65rem;
     }
     
     .countdown-value {
@@ -721,7 +880,7 @@ body {
     
     .envelope-img {
         width: 85vw;
-        max-width: 320px;
+        max-width: 160px;
     }
     
     .envelope-photo {
@@ -733,7 +892,7 @@ body {
     }
     
     .hero-title {
-        font-size: 0.75rem;
+        font-size: 1.1rem;
         letter-spacing: 0.1em;
         margin-bottom: 1.25rem;
     }
@@ -784,19 +943,24 @@ body {
     .schedule-block h3,
     .venue-block h3,
     .dresscode-block h3 {
-        font-size: 1.15rem;
+        font-size: 1.68rem;
         margin-bottom: 1rem;
     }
     
-    .schedule-item {
+    .schedule-step {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.25rem;
         padding: 0.75rem 1rem;
     }
     
-    .schedule-item .time {
+    .schedule-step .time {
         min-width: auto;
+    }
+    
+    .decor-cherubs-hero {
+        width: 300px;
+        margin: 1rem auto;
     }
     
     .venue-photo {
@@ -826,6 +990,15 @@ body {
         font-size: 0.9rem;
     }
     
+    .dresscode-swatches {
+        gap: 1rem;
+    }
+    
+    .swatch {
+        width: 60px;
+        height: 60px;
+    }
+    
     .contacts-section {
         padding: 2rem 1rem;
     }
@@ -848,12 +1021,22 @@ body {
     }
     
     .footer {
-        padding: 3rem 1rem;
-        font-size: 1.3rem;
+        padding: 2rem 1rem;
+        font-size: 0.9rem;
     }
     
     .footer-names {
-        font-size: 2.2rem;
+        font-size: 1.5rem;
+    }
+    
+    .contacts-photos {
+        margin-top: 2rem;
+        gap: 1rem;
+    }
+    
+    .contacts-photos .contact-photo {
+        width: 140px;
+        height: 140px;
     }
     
     .countdown-block {
@@ -885,7 +1068,7 @@ body {
     }
     
     .hero-title {
-        font-size: 0.65rem;
+        font-size: 0.95rem;
     }
     
     .couple-names-script h2 {
@@ -905,6 +1088,6 @@ body {
     }
     
     .footer-names {
-        font-size: 1.9rem;
+        font-size: 1.3rem;
     }
 }

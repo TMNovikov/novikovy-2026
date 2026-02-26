@@ -6,7 +6,7 @@
     <title>Свадебное приглашение — Тимур и Алина</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,17 +19,20 @@
                 <img src="assets/envelope.png" alt="Свадебный конверт" class="envelope-img">
             </button>
             <p class="envelope-hint">Нажмите на конверт</p>
-            <div class="countdown-block">
+            <div class="countdown-block" role="timer" aria-live="polite" aria-label="Обратный отсчёт до свадьбы">
                 <h3 class="countdown-title">До свадьбы осталось</h3>
                 <div class="countdown-timer">
-                    <span class="countdown-value" id="countdown-months">0</span>
-                    <span class="countdown-label">месяцев</span>
-                    <span class="countdown-sep">•</span>
                     <span class="countdown-value" id="countdown-days">0</span>
                     <span class="countdown-label">дней</span>
                     <span class="countdown-sep">•</span>
+                    <span class="countdown-value" id="countdown-hours">0</span>
+                    <span class="countdown-label">часов</span>
+                    <span class="countdown-sep">•</span>
                     <span class="countdown-value" id="countdown-minutes">0</span>
                     <span class="countdown-label">минут</span>
+                    <span class="countdown-sep">•</span>
+                    <span class="countdown-value" id="countdown-seconds">0</span>
+                    <span class="countdown-label">секунд</span>
                 </div>
             </div>
         </div>
@@ -41,14 +44,15 @@
         <section class="hero-section scroll-reveal">
             <div class="decor-top"></div>
             <h1 class="hero-title">ПРИГЛАШАЕМ НА НАШУ СВАДЬБУ</h1>
+            <img src="assets/cherubs.png" alt="" class="decor-cherubs decor-cherubs-hero" aria-hidden="true">
             <div class="couple-names couple-names-script">
                 <h2>Тимур</h2>
                 <span class="amp-large">&</span>
                 <h2 class="name-alina">Алина</h2>
             </div>
             <p class="invitation-text">
-                Дорогие и любимые родные и близкие!<br><br>
-                С огромной радостью и трепетом в сердце мы приглашаем вас разделить с нами один из самых важных и счастливых дней нашей жизни — день нашей свадьбы.<br><br>
+                Дорогие родные и близкие!<br>
+                С огромной радостью и трепетом в сердце мы приглашаем вас разделить с нами один из самых важных и счастливых дней нашей жизни — день нашей свадьбы.<br>
                 Для нас бесценно быть окружёнными теми, кто дорог и любим. Ваше присутствие станет для нас особым подарком и сделает этот праздник по-настоящему незабываемым.
             </p>
             <div class="date-block">
@@ -65,17 +69,32 @@
             <div class="schedule-block">
                 <h3>План дня</h3>
                 <div class="schedule-list">
-                    <div class="schedule-item">
-                        <span class="time">13:00</span>
-                        <span class="event">Сбор гостей, приветственный фуршет</span>
+                    <div class="schedule-step">
+                        <span class="step-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </span>
+                        <div class="step-content">
+                            <span class="time">13:00</span>
+                            <span class="event">Сбор гостей</span>
+                        </div>
                     </div>
-                    <div class="schedule-item">
-                        <span class="time">13:20</span>
-                        <span class="event">Церемония бракосочетания</span>
+                    <div class="schedule-step">
+                        <span class="step-icon" aria-hidden="true">
+                            <img src="https://free-png.ru/wp-content/uploads/2022/01/free-png.ru-798.png" alt="Кольца">
+                        </span>
+                        <div class="step-content">
+                            <span class="time">13:20</span>
+                            <span class="event">Церемония бракосочетания</span>
+                        </div>
                     </div>
-                    <div class="schedule-item">
-                        <span class="time">15:30</span>
-                        <span class="event">Банкет</span>
+                    <div class="schedule-step">
+                        <span class="step-icon" aria-hidden="true">
+                            <img src="assets/wedding-glasses.png" alt="">
+                        </span>
+                        <div class="step-content">
+                            <span class="time">15:30</span>
+                            <span class="event">Банкет</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -91,6 +110,12 @@
             <div class="dresscode-block">
                 <h3>Дресс код</h3>
                 <p>Мы очень старались сделать праздник идеальным. Поэтому нам будет приятно, если вы поддержите цветовую гамму нашего торжества в своих нарядах</p>
+                <div class="dresscode-swatches" aria-label="Цветовая гамма дресс-кода">
+                    <span class="swatch swatch-1" title="Очень тёмный коричневый"></span>
+                    <span class="swatch swatch-2" title="Тёмно-коричневый"></span>
+                    <span class="swatch swatch-3" title="Светло-коричневый"></span>
+                    <span class="swatch swatch-4" title="Очень светлый бежевый"></span>
+                </div>
             </div>
             <div class="decor-corner decor-corner-bl"></div>
             <div class="decor-corner decor-corner-br"></div>
@@ -101,22 +126,26 @@
         <section class="contacts-section scroll-reveal">
             <h2 class="section-title">Контакты</h2>
             <p class="contacts-intro">По всем вопросам вы можете обращаться к нам</p>
-            <div class="contacts-list">
+            <address class="contacts-list">
                 <div class="contact-item">
-                    <span class="phone">+7 (995) 159-60-66</span>
+                    <a href="tel:+79951596066" class="phone">+7 (995) 159-60-66</a>
                     <span class="role">Жених</span>
                 </div>
                 <div class="contact-item">
-                    <span class="phone">+7 (960) 087-89-89</span>
+                    <a href="tel:+79600878989" class="phone">+7 (960) 087-89-89</a>
                     <span class="role">Невеста</span>
                 </div>
+            </address>
+            <div class="contacts-photos">
+                <img src="assets/contact-photo-1.jpg" alt="Тимур и Алина" class="contact-photo">
+                <img src="assets/contact-photo-2.jpg" alt="Тимур и Алина" class="contact-photo">
             </div>
         </section>
 
         <div class="decor-divider"></div>
         <footer class="footer scroll-reveal">
             <div class="decor-hearts decor-hearts-footer"></div>
-            <p class="footer-names">Тимур & <span class="name-alina">Алина</span> — 23.04.2026</p>
+            <p class="footer-names">Тимур <span class="footer-conjunction">&</span> <span class="name-alina">Алина</span> — 23.04.2026</p>
         </footer>
     </main>
 
