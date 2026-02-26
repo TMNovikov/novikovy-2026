@@ -533,6 +533,12 @@ body {
 }
 
 /* Footer */
+.footer.scroll-reveal.visible {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 142px;
+}
+
 .footer {
     position: relative;
     padding: 3.35rem 1.35rem;
@@ -654,7 +660,14 @@ body {
 .decor-hearts-hero::after,
 .decor-hearts-footer::after { margin-left: 0.5rem; }
 
+.decor-hearts-footer .decor-heart-center {
+    font-size: var(--decor-hearts-size);
+    color: #a68b4b;
+    margin: 0 0.5rem;
+}
+
 .decor-hearts-footer {
+    margin-top: 16px;
     margin-bottom: 1rem;
 }
 
