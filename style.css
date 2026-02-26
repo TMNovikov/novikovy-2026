@@ -1,6 +1,16 @@
+/* === Fonts === */
+@font-face {
+    font-family: 'AnastasiaScriptC';
+    src: url('assets/fonts/AnastasiaScriptC%20Regular/AnastasiaScriptC%20Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* === CSS Variables === */
 :root {
     --font-script: 'Great Vibes', cursive;
+    --font-names: 'AnastasiaScriptC', cursive;
     --font-serif: 'Cormorant Garamond', Georgia, serif;
     --font-sans: 'Montserrat', sans-serif;
     /* Цвета образцов ткани (дресс-код) — меняйте RGB по необходимости */
@@ -129,7 +139,7 @@ body {
 
 /* Рукописный шрифт для имён */
 .envelope-names {
-    font-family: var(--font-script);
+    font-family: var(--font-names);
     font-size: 3.5rem;
     font-weight: 400;
     color: var(--color-brown);
@@ -144,7 +154,7 @@ body {
 }
 
 /* Заглавная буква А в «Алина» — выделена размером */
-.name-alina::first-letter {
+/*.name-alina::first-letter {
     font-size: 1.3em;
 }
 
@@ -194,7 +204,7 @@ body {
 
 .couple-names-script h2,
 .couple-names-script .amp-large {
-    font-family: var(--font-script);
+    font-family: var(--font-names);
     font-weight: 400;
 }
 
@@ -204,9 +214,10 @@ body {
 
 .amp-large,
 .couple-names-script .amp-large {
-    font-family: var(--font-script);
+    font-family: var(--font-names);
     font-size: clamp(1.2rem, 3vw, 1.8rem);
     color: var(--color-gold);
+    padding-left: 20px;
 }
 
 .invitation-text {
@@ -532,7 +543,7 @@ body {
 }
 
 .footer-names {
-    font-family: var(--font-script);
+    font-family: var(--font-names);
     font-size: 2.35rem;
 }
 
