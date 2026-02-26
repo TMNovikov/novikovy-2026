@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Свадебное приглашение — Тимур и Алина</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Экран-заставка с конвертом -->
+    <div id="envelope-screen" class="envelope-screen">
+        <div class="envelope-container">
+            <h1 class="envelope-title">Свадебное приглашение</h1>
+            <h2 class="envelope-names">Тимур <span class="amp">&</span> Алина</h2>
+            <button id="envelope-click" class="envelope-photo" type="button" aria-label="Открыть приглашение">
+                <img src="assets/envelope.png" alt="Свадебный конверт" class="envelope-img">
+            </button>
+            <p class="envelope-hint">Нажмите на конверт</p>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <main id="main-content" class="main-content hidden">
+        <!-- Приглашение -->
+        <section class="hero-section">
+            <h1 class="hero-title">ПРИГЛАШАЕМ НА НАШУ СВАДЬБУ</h1>
+            <div class="couple-names couple-names-script">
+                <h2>Тимур</h2>
+                <span class="amp-large">&</span>
+                <h2>Алина</h2>
+            </div>
+            <p class="invitation-text">
+                Дорогие и любимые родные и близкие!<br><br>
+                С огромной радостью и трепетом в сердце мы приглашаем вас разделить с нами один из самых важных и счастливых дней нашей жизни — день нашей свадьбы.<br><br>
+                Для нас бесценно быть окружёнными теми, кто дорог и любим. Ваше присутствие станет для нас особым подарком и сделает этот праздник по-настоящему незабываемым.
+            </p>
+            <div class="date-block">
+                <span class="date">23 АПРЕЛЯ 2026</span>
+            </div>
+        </section>
+
+        <!-- Детали торжества -->
+        <section class="details-section">
+            <h2 class="section-title">Детали торжества</h2>
+            
+            <div class="schedule-block">
+                <h3>План дня</h3>
+                <div class="schedule-list">
+                    <div class="schedule-item">
+                        <span class="time">13:00</span>
+                        <span class="event">Сбор гостей, приветственный фуршет</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time">13:20</span>
+                        <span class="event">Церемония бракосочетания</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time">15:30</span>
+                        <span class="event">Банкет</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="venue-block">
+                <h3>Место проведения</h3>
+                <img src="assets/venue.png" alt="Центр семьи Казан" class="venue-photo">
+                <p class="venue-name">Центр семьи Казан</p>
+                <p class="venue-address">по адресу:<br>ул. Сибгата Хакима, 4</p>
+                <a href="https://yandex.ru/maps/-/CPeoqNLd" target="_blank" rel="noopener" class="route-btn">построить маршрут</a>
+            </div>
+
+            <div class="dresscode-block">
+                <h3>Дресс код</h3>
+                <p>Мы очень старались сделать праздник идеальным. Поэтому нам будет приятно, если вы поддержите цветовую гамму нашего торжества в своих нарядах</p>
+            </div>
+        </section>
+
+        <!-- Контакты -->
+        <section class="contacts-section">
+            <h2 class="section-title">Контакты</h2>
+            <p class="contacts-intro">По всем вопросам вы можете обращаться к нам</p>
+            <div class="contacts-list">
+                <div class="contact-item">
+                    <span class="phone">+7 (995) 159-60-66</span>
+                    <span class="role">Жених</span>
+                </div>
+                <div class="contact-item">
+                    <span class="phone">+7 (960) 087-89-89</span>
+                    <span class="role">Невеста</span>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p class="footer-names">Тимур & Алина — 23.04.2026</p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
