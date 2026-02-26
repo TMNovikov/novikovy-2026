@@ -14,26 +14,37 @@
     <div id="envelope-screen" class="envelope-screen">
         <div class="envelope-container">
             <h1 class="envelope-title">Свадебное приглашение</h1>
-            <h2 class="envelope-names">Тимур <span class="amp">&</span> Алина</h2>
+            <h2 class="envelope-names">Тимур <span class="amp">&</span> <span class="name-alina">Алина</span></h2>
             <button id="envelope-click" class="envelope-photo" type="button" aria-label="Открыть приглашение">
-                <span class="envelope-wrapper">
-                    <img src="assets/envelope.png" alt="Свадебный конверт" class="envelope-img">
-                    <span class="envelope-seal-overlay">Т&amp;А</span>
-                </span>
+                <img src="assets/envelope.png" alt="Свадебный конверт" class="envelope-img">
             </button>
             <p class="envelope-hint">Нажмите на конверт</p>
+            <div class="countdown-block">
+                <h3 class="countdown-title">До свадьбы осталось</h3>
+                <div class="countdown-timer">
+                    <span class="countdown-value" id="countdown-months">0</span>
+                    <span class="countdown-label">месяцев</span>
+                    <span class="countdown-sep">•</span>
+                    <span class="countdown-value" id="countdown-days">0</span>
+                    <span class="countdown-label">дней</span>
+                    <span class="countdown-sep">•</span>
+                    <span class="countdown-value" id="countdown-minutes">0</span>
+                    <span class="countdown-label">минут</span>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Основной контент -->
     <main id="main-content" class="main-content hidden">
         <!-- Приглашение -->
-        <section class="hero-section">
+        <section class="hero-section scroll-reveal">
+            <div class="decor-top"></div>
             <h1 class="hero-title">ПРИГЛАШАЕМ НА НАШУ СВАДЬБУ</h1>
             <div class="couple-names couple-names-script">
                 <h2>Тимур</h2>
                 <span class="amp-large">&</span>
-                <h2>Алина</h2>
+                <h2 class="name-alina">Алина</h2>
             </div>
             <p class="invitation-text">
                 Дорогие и любимые родные и близкие!<br><br>
@@ -43,10 +54,12 @@
             <div class="date-block">
                 <span class="date">23 АПРЕЛЯ 2026</span>
             </div>
+            <div class="decor-hearts decor-hearts-hero"></div>
         </section>
 
         <!-- Детали торжества -->
-        <section class="details-section">
+        <div class="decor-divider"></div>
+        <section class="details-section scroll-reveal">
             <h2 class="section-title">Детали торжества</h2>
             
             <div class="schedule-block">
@@ -79,10 +92,13 @@
                 <h3>Дресс код</h3>
                 <p>Мы очень старались сделать праздник идеальным. Поэтому нам будет приятно, если вы поддержите цветовую гамму нашего торжества в своих нарядах</p>
             </div>
+            <div class="decor-corner decor-corner-bl"></div>
+            <div class="decor-corner decor-corner-br"></div>
         </section>
 
+        <div class="decor-divider"></div>
         <!-- Контакты -->
-        <section class="contacts-section">
+        <section class="contacts-section scroll-reveal">
             <h2 class="section-title">Контакты</h2>
             <p class="contacts-intro">По всем вопросам вы можете обращаться к нам</p>
             <div class="contacts-list">
@@ -97,8 +113,10 @@
             </div>
         </section>
 
-        <footer class="footer">
-            <p class="footer-names">Тимур & Алина — 23.04.2026</p>
+        <div class="decor-divider"></div>
+        <footer class="footer scroll-reveal">
+            <div class="decor-hearts decor-hearts-footer"></div>
+            <p class="footer-names">Тимур & <span class="name-alina">Алина</span> — 23.04.2026</p>
         </footer>
     </main>
 
