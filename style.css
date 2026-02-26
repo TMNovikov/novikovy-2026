@@ -5,7 +5,7 @@
     --font-sans: 'Montserrat', sans-serif;
     /* Цвета образцов ткани (дресс-код) — меняйте RGB по необходимости */
     --swatch-1: rgb(33, 22, 24);
-    --swatch-2: rgb(99, 67, 59);
+    --swatch-2: rgb(75,52,47);
     --swatch-3: rgb(118, 86, 73);
     --swatch-4: rgb(206, 196, 189);
     --color-cream: #faf8f5;
@@ -18,8 +18,7 @@
     --color-text-light: #6b5d50;
     --shadow-soft: 0 4px 20px rgba(92, 74, 58, 0.08);
     --shadow-medium: 0 8px 40px rgba(92, 74, 58, 0.12);
-    --decor-hearts-hero: 3.6rem;
-    --decor-hearts-footer: 2.2rem;
+    --decor-hearts-size: 3.6rem;
 }
 
 /* === Reset & Base === */
@@ -100,7 +99,7 @@ body {
 
 .envelope-img {
     display: block;
-    width: 550px;
+    width: 688px;
     height: auto;
     max-width: 95vw;
     border-radius: 4px;
@@ -586,16 +585,18 @@ body {
 
 /* === Декоративные элементы === */
 .decor-top {
-    width: 80px;
-    height: 20px;
+    width: 336px;
+    height: 84px;
     margin: 0 auto 2rem;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 20'%3E%3Cpath fill='none' stroke='%23c9a962' stroke-width='1' d='M0 10 Q20 0 40 10 Q60 20 80 10'/%3E%3Cpath fill='none' stroke='%23c9a962' stroke-width='0.5' opacity='0.6' d='M10 10 Q30 5 50 10 Q70 15 80 10'/%3E%3C/svg%3E") no-repeat center;
 }
 
 .decor-divider {
-    height: 120px;
+    width: 336px;
+    height: 84px;
     margin: 0 auto;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'%3E%3Cpath fill='%23c9a962' opacity='0.4' d='M60 20 m-8 0 a 8 8 0 1 1 16 0 a 8 8 0 1 1 -16 0'/%3E%3Cpath fill='none' stroke='%23c9a962' stroke-width='0.8' opacity='0.5' d='M0 20 h50 M70 20 h50'/%3E%3Cpath fill='%23c9a962' opacity='0.3' d='M55 18 l5 4 -5 4 5 4'/%3E%3Cpath fill='%23c9a962' opacity='0.3' d='M65 18 l-5 4 5 4 -5 4'/%3E%3C/svg%3E") no-repeat center;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 20'%3E%3Cpath fill='none' stroke='%23c9a962' stroke-width='1' d='M0 10 Q20 0 40 10 Q60 20 80 10'/%3E%3Cpath fill='none' stroke='%23c9a962' stroke-width='0.5' opacity='0.6' d='M10 10 Q30 5 50 10 Q70 15 80 10'/%3E%3C/svg%3E") no-repeat center;
+    background-size: contain;
 }
 
 /* Ангелочки — после «Приглашаем на нашу свадьбу» */
@@ -622,29 +623,28 @@ body {
     animation: float 4s ease-in-out infinite;
 }
 
-.decor-hearts-hero::before,
-.decor-hearts-hero::after {
-    content: '♥';
-    font-size: var(--decor-hearts-hero);
-    color: var(--color-gold);
+.decor-hearts.decor-hearts-hero,
+.decor-hearts.decor-hearts-footer {
+    opacity: 1;
 }
 
-.decor-hearts-hero::before { margin-right: 0.5rem; }
-.decor-hearts-hero::after { margin-left: 0.5rem; }
+.decor-hearts-hero::before,
+.decor-hearts-hero::after,
+.decor-hearts-footer::before,
+.decor-hearts-footer::after {
+    content: '♥';
+    font-size: var(--decor-hearts-size);
+    color: #a68b4b;
+}
+
+.decor-hearts-hero::before,
+.decor-hearts-footer::before { margin-right: 0.5rem; }
+.decor-hearts-hero::after,
+.decor-hearts-footer::after { margin-left: 0.5rem; }
 
 .decor-hearts-footer {
     margin-bottom: 1rem;
 }
-
-.decor-hearts-footer::before,
-.decor-hearts-footer::after {
-    content: '♥';
-    font-size: var(--decor-hearts-footer);
-    color: var(--color-gold);
-}
-
-.decor-hearts-footer::before { margin-right: 0.5rem; }
-.decor-hearts-footer::after { margin-left: 0.5rem; }
 
 .decor-corner {
     position: absolute;
@@ -739,7 +739,7 @@ body {
     
     .envelope-img {
         width: 90vw;
-        max-width: 200px;
+        max-width: 250px;
     }
     
     .envelope-title,
@@ -880,7 +880,7 @@ body {
     
     .envelope-img {
         width: 85vw;
-        max-width: 160px;
+        max-width: 200px;
     }
     
     .envelope-photo {
