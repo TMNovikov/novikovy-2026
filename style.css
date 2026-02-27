@@ -349,12 +349,12 @@ body {
 
 .schedule-list::before {
     top: 138px;
-    height: 39px;
+    height: 35px;
 }
 
 .schedule-list::after {
     top: 303px;
-    height: 32px;
+    height: 34px;
 }
 
 .schedule-step {
@@ -939,13 +939,13 @@ body {
     .schedule-list::before {
         left: 53px;
         top: 120px;
-        height: 45px;
+        height: 41px;
     }
-    
+
     .schedule-list::after {
         left: 53px;
-        top: 270px;
-        height: 32px;
+        top: 272px;
+        height: 34px;
     }
     
     .schedule-step .time {
@@ -1105,14 +1105,14 @@ body {
     
     .schedule-list::before {
         left: 53px;
-        top: 118px;
-        height: 43px;
+        top: 122px;
+        height: 39px;
     }
-    
+
     .schedule-list::after {
         left: 53px;
-        top: 268px;
-        height: 28px;
+        top: 272px;
+        height: 29px;
     }
     
     .schedule-step .step-icon {
