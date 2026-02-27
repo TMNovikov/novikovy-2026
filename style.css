@@ -160,7 +160,7 @@ body {
 
 /* === Main Content === */
 .main-content {
-    padding-top: 2rem;
+    padding-top: 0;
     animation: fadeIn 1s ease;
 }
 
@@ -175,6 +175,10 @@ body {
     padding: 3rem 1.5rem 4rem;
     max-width: 700px;
     margin: 0 auto;
+}
+
+.hero-section.scroll-reveal.visible {
+    padding-top: 0;
 }
 
 .hero-title {
@@ -337,6 +341,7 @@ body {
     position: relative;
 }
 
+/* Линии соединяют круг-контейнеры строго: низ 1го → верх 2го, низ 2го → верх 3го, не проходя через круги */
 .schedule-list::before,
 .schedule-list::after {
     content: '';
@@ -347,53 +352,42 @@ body {
     z-index: 0;
 }
 
+/* Линия 1: от нижней точки 1-го круга до верхней точки 2-го (desktop: 126px, padding 14, gap 28) */
 .schedule-list::before {
-    top: 138px;
-    height: 32px;
+    top: 154px;
+    height: 56px;
 }
 
+/* Линия 2: от нижней точки 2-го круга до верхней точки 3-го */
 .schedule-list::after {
-    top: 303px;
-    height: 36px;
+    top: 322px;
+    height: 56px;
 }
 
 .schedule-step {
     display: flex;
     align-items: flex-start;
     gap: 1.75rem;
-    min-height: 140px;
-    padding: 12px 0;
+    min-height: 154px;
+    padding: 14px 0;
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateX(-80px) scale(0.92);
     position: relative;
     z-index: 1;
 }
 
 .details-section.visible .schedule-step {
-    animation: schedule-step-reveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation: schedule-step-reveal 1.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-.schedule-step:nth-child(1) {
-    animation-delay: 0s;
-    padding-top: 12px;
-    padding-bottom: 2px;
-}
-
-.schedule-step:nth-child(2) {
-    animation-delay: 1.2s;
-    padding-top: 9px;
-    padding-bottom: 10px;
-}
-
-.schedule-step:nth-child(3) {
-    animation-delay: 2.4s;
-    padding-top: 0;
-}
+.schedule-step:nth-child(1) { animation-delay: 0s; }
+.schedule-step:nth-child(2) { animation-delay: 0.4s; }
+.schedule-step:nth-child(3) { animation-delay: 0.8s; }
 
 @keyframes schedule-step-reveal {
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(0) scale(1);
     }
 }
 
@@ -532,8 +526,16 @@ body {
     text-align: center;
 }
 
+.contacts-section.scroll-reveal.visible {
+    padding-top: 20px;
+}
+
+.contacts-section .section-title {
+    margin-bottom: 0;
+}
+
 .contacts-intro {
-    margin-bottom: 2rem;
+    margin-bottom: 10px;
     color: var(--color-text-light);
 }
 
@@ -908,14 +910,10 @@ body {
     }
     
     .schedule-step {
-        padding: 10px 0;
-        min-height: 125px;
+        padding: 12px 0;
+        min-height: 133px;
         gap: 1.5rem;
     }
-    
-    .schedule-step:nth-child(1) { padding-top: 12px; padding-bottom: 2px; }
-    .schedule-step:nth-child(2) { padding-top: 9px; padding-bottom: 10px; }
-    .schedule-step:nth-child(3) { padding-top: 0; }
     
     .schedule-step .step-icon {
         width: 109px;
@@ -936,16 +934,17 @@ body {
         gap: 28px;
     }
     
+    /* tablet: 109px circles, padding 12, gap 28. Круг1 низ 121, круг2 верх 173, круг2 низ 282, круг3 верх 334 */
     .schedule-list::before {
         left: 53px;
-        top: 120px;
-        height: 37px;
+        top: 121px;
+        height: 52px;
     }
 
     .schedule-list::after {
         left: 53px;
-        top: 274px;
-        height: 36px;
+        top: 282px;
+        height: 52px;
     }
     
     .schedule-step .time {
@@ -1090,29 +1089,26 @@ body {
     }
     
     .schedule-step {
-        padding: 8px 0;
-        min-height: 125px;
+        padding: 10px 0;
+        min-height: 129px;
         gap: 1.25rem;
     }
-    
-    .schedule-step:nth-child(1) { padding-top: 12px; padding-bottom: 2px; }
-    .schedule-step:nth-child(2) { padding-top: 9px; padding-bottom: 10px; }
-    .schedule-step:nth-child(3) { padding-top: 0; }
     
     .schedule-list {
         gap: 24px;
     }
     
+    /* mobile: 109px circles, padding 10, gap 24. Круг1 низ 119, круг2 верх 163, круг2 низ 272, круг3 верх 316 */
     .schedule-list::before {
         left: 53px;
-        top: 126px;
-        height: 35px;
+        top: 119px;
+        height: 44px;
     }
 
     .schedule-list::after {
         left: 53px;
-        top: 276px;
-        height: 30px;
+        top: 272px;
+        height: 44px;
     }
     
     .schedule-step .step-icon {
@@ -1185,7 +1181,7 @@ body {
     }
     
     .contacts-intro {
-        margin-bottom: 1.5rem;
+        margin-bottom: 10px;
         font-size: 0.95rem;
     }
     
