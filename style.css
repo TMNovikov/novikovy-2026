@@ -364,29 +364,29 @@ body {
     min-height: 140px;
     padding: 12px 0;
     opacity: 0;
-    transform: translateX(-16px);
+    transform: translateX(-50px);
     position: relative;
     z-index: 1;
 }
 
 .details-section.visible .schedule-step {
-    animation: schedule-step-reveal 0.6s ease forwards;
+    animation: schedule-step-reveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .schedule-step:nth-child(1) {
-    animation-delay: 0.15s;
+    animation-delay: 0s;
     padding-top: 12px;
     padding-bottom: 2px;
 }
 
 .schedule-step:nth-child(2) {
-    animation-delay: 0.35s;
+    animation-delay: 1.2s;
     padding-top: 9px;
     padding-bottom: 10px;
 }
 
 .schedule-step:nth-child(3) {
-    animation-delay: 0.55s;
+    animation-delay: 2.4s;
     padding-top: 0;
 }
 
