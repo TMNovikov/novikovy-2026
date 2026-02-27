@@ -354,7 +354,7 @@ body {
 
 .schedule-list::after {
     top: 303px;
-    height: 38px;
+    height: 32px;
 }
 
 .schedule-step {
@@ -944,8 +944,8 @@ body {
     
     .schedule-list::after {
         left: 53px;
-        top: 262px;
-        height: 47px;
+        top: 270px;
+        height: 32px;
     }
     
     .schedule-step .time {
@@ -1111,8 +1111,8 @@ body {
     
     .schedule-list::after {
         left: 53px;
-        top: 254px;
-        height: 45px;
+        top: 268px;
+        height: 28px;
     }
     
     .schedule-step .step-icon {
