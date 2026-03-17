@@ -70,6 +70,18 @@ document.addEventListener('DOMContentLoaded', () => {
         initScrollReveal();
     }
 
+    // Блок "Фото с торжества" — подставьте ссылку на облако
+    const PHOTOS_CLOUD_URL = '';
+    const photosBtn = document.querySelector('.photos-btn');
+    const photosNote = document.querySelector('.photos-note');
+
+    if (photosBtn) {
+        if (PHOTOS_CLOUD_URL) {
+            photosBtn.href = PHOTOS_CLOUD_URL;
+            if (photosNote) photosNote.textContent = 'Ссылка открывается в новом окне.';
+        }
+    }
+
     function initScrollReveal() {
         const reveals = document.querySelectorAll('.scroll-reveal');
 

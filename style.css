@@ -318,6 +318,28 @@ body {
     margin: 0 auto 3rem;
 }
 
+.photos-block {
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.photos-text {
+    color: var(--color-text);
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+/* Кнопка фото должна выглядеть как route-btn */
+.photos-btn {
+    /* визуал задаёт .route-btn */
+}
+
+.photos-note {
+    margin-top: 0.75rem;
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+}
 .schedule-block {
     text-align: left;
     padding: 0 1.5rem;
@@ -325,7 +347,8 @@ body {
 
 .schedule-block h3,
 .venue-block h3,
-.dresscode-block h3 {
+.dresscode-block h3,
+.photos-block h3 {
     font-family: var(--font-script);
     font-size: 2.28rem;
     font-weight: 400;
@@ -898,10 +921,15 @@ body {
     .dresscode-block {
         margin-bottom: 2.5rem;
     }
+
+    .photos-block {
+        margin-bottom: 2.5rem;
+    }
     
     .schedule-block h3,
     .venue-block h3,
-    .dresscode-block h3 {
+    .dresscode-block h3,
+    .photos-block h3 {
         font-size: 1.92rem;
     }
     
@@ -1076,10 +1104,25 @@ body {
     .dresscode-block {
         margin-bottom: 2rem;
     }
+
+    .photos-block {
+        margin-bottom: 2rem;
+    }
+
+    .photos-text {
+        font-size: 0.95rem;
+    }
+
+    /* mobile-ширина уже задаётся .route-btn */
+
+    .photos-note {
+        font-size: 0.9rem;
+    }
     
     .schedule-block h3,
     .venue-block h3,
-    .dresscode-block h3 {
+    .dresscode-block h3,
+    .photos-block h3 {
         font-size: 1.68rem;
         margin-bottom: 1rem;
     }

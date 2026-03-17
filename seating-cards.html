@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Карточки рассадки</title>
+    <!-- Подключаем те же шрифты, что и на основном сайте -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стили специально для карточек рассадки и печати */
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .cards-container {
+            width: min(900px, 100%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .print-page {
+            display: grid;
+            grid-template-columns: repeat(2, 105mm);
+            grid-template-rows: repeat(2, 148mm);
+            gap: 0;
+            justify-content: center;
+            align-content: start;
+            background: white;
+            padding: 0;
+        }
+
+        /* 
+           Формат A6 (105х148 мм).
+           Для печати на A4 помещается 4 карточки (2 колонки, 2 строки).
+        */
+        .seating-card {
+            width: 105mm;
+            height: 148mm;
+            position: relative;
+            display: grid;
+            box-sizing: border-box;
+            grid-template-rows: 74mm 74mm; /* верх — под сгиб, низ — видимая часть (строго пополам A6) */
+            text-align: center;
+            
+            /* Основной фон */
+            background: #554039;
+            background-image:
+                radial-gradient(circle at 10% 10%, rgba(201, 169, 98, 0.10) 0%, transparent 45%),
+                radial-gradient(circle at 85% 90%, rgba(201, 169, 98, 0.06) 0%, transparent 55%),
+                linear-gradient(135deg, rgba(245, 240, 232, 0.06) 0%, rgba(61, 52, 41, 0) 60%),
+                url('assets/silk-texture.png');
+            background-size: auto, auto, auto, cover;
+            background-position: center, center, center, center;
+            background-blend-mode: screen, screen, normal, multiply;
+            border: 1px dashed #ccc; /* Пунктир для вырезания */
+            overflow: hidden;
+            
+            padding: 0;
+        }
+
+        /* Верхняя половина — под сгиб (не видна в стоячей карточке) */
+        .fold-area {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Линия сгиба (очень лёгкая, чтобы можно было биговать) */
+        .fold-area::after {
+            content: '';
+            position: absolute;
+            left: 10mm;
+            right: 10mm;
+            bottom: 0;
+            height: 0;
+            border-bottom: 1px dashed rgba(107, 93, 80, 0.25);
+        }
+
+        /* Нижняя половина — видимая часть (весь декор и текст здесь) */
+        .content-area {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* Небольшие отступы внутри нижней половины */
+            margin: 6mm;
+            padding: 6mm 8mm 8mm;
+
+            /* Плашка поверх — фон как у главного экрана */
+            background: var(--color-cream);
+            background-image:
+                radial-gradient(circle at 20% 80%, rgba(201, 169, 98, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(201, 169, 98, 0.04) 0%, transparent 50%);
+            border-radius: 3mm;
+            box-shadow: 0 3mm 10mm rgba(61, 46, 36, 0.10);
+            border: 0.4mm solid rgba(201, 169, 98, 0.35);
+        }
+
+        /* Лёгкая шелковая текстура + мягкое свечение внутри плашки */
+        .content-area::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background:
+                radial-gradient(circle at 50% 35%, rgba(201, 169, 98, 0.10) 0%, transparent 55%),
+                url('assets/silk-texture.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.22;
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: multiply;
+        }
+
+        /* Аккуратные уголки-скобки (минималистично, но «дорого») */
+        .content-area::after {
+            content: '';
+            position: absolute;
+            inset: 3.5mm;
+            border-radius: 2mm;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                linear-gradient(var(--color-gold) 0 0) left top/12mm 0.45mm no-repeat,
+                linear-gradient(var(--color-gold) 0 0) left top/0.45mm 12mm no-repeat,
+                linear-gradient(var(--color-gold) 0 0) right top/12mm 0.45mm no-repeat,
+                linear-gradient(var(--color-gold) 0 0) right top/0.45mm 12mm no-repeat,
+                linear-gradient(var(--color-gold) 0 0) left bottom/12mm 0.45mm no-repeat,
+                linear-gradient(var(--color-gold) 0 0) left bottom/0.45mm 12mm no-repeat,
+                linear-gradient(var(--color-gold) 0 0) right bottom/12mm 0.45mm no-repeat,
+                linear-gradient(var(--color-gold) 0 0) right bottom/0.45mm 12mm no-repeat;
+            opacity: 0.45;
+        }
+
+        .content-area > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .guest-name {
+            font-family: var(--font-names);
+            font-size: 3.6rem;
+            color: var(--color-text);
+            line-height: 1.1;
+            margin-bottom: 5mm;
+            margin-top: 8mm;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+
+        /* Монограмма свадьбы «Т&А» — рукописная, как на сайте */
+        .wedding-seal {
+            margin-top: 8mm;
+            width: 100%;
+            display: grid;
+            place-items: center;
+            user-select: none;
+            position: relative;
+        }
+
+        /* Вместо овала — тонкие линии слева/справа */
+        .wedding-seal::before,
+        .wedding-seal::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 22mm;
+            height: 0;
+            border-top: 0.35mm solid rgba(201, 169, 98, 0.55);
+            transform: translateY(-50%);
+            opacity: 0.9;
+        }
+        .wedding-seal::before { left: 0; }
+        .wedding-seal::after { right: 0; }
+
+        .wedding-seal span {
+            font-family: var(--font-names);
+            font-weight: 400;
+            font-size: 1.55rem;
+            letter-spacing: 0.06em;
+            color: rgba(92, 74, 58, 0.92);
+            line-height: 1;
+            padding: 0 0.35em;
+            transform: none;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+            text-shadow: 0 0.6mm 1.6mm rgba(250, 248, 245, 0.35);
+        }
+
+        .wedding-seal .amp {
+            font-family: var(--font-serif);
+            font-size: 0.7em;
+            color: rgba(201, 169, 98, 0.95);
+            margin: 0;
+            letter-spacing: 0;
+            background: transparent;
+            border-radius: 0;
+        }
+
+        /* Визуальный пробел после "А" в монограмме */
+        .wedding-seal span::after {
+            content: '\00A0';
+        }
+
+        /* Инструкция вверху экрана (не будет печататься) */
+        .print-instructions {
+            margin-bottom: 2rem;
+            text-align: center;
+            font-family: var(--font-sans);
+        }
+        
+        .print-btn {
+            padding: 10px 20px;
+            background: var(--color-gold);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+
+            html, body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .print-instructions {
+                display: none;
+            }
+            .cards-container {
+                box-shadow: none;
+                padding: 0;
+                background: transparent;
+                gap: 0;
+            }
+
+            .print-page {
+                width: 210mm;
+                height: 297mm;
+                padding: 0;
+                margin: 0;
+                break-after: page;
+                page-break-after: always;
+            }
+
+            .print-page:last-child {
+                break-after: auto;
+                page-break-after: auto;
+            }
+
+            .seating-card {
+                border: 0.1mm dashed #999;
+                box-sizing: border-box;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="print-instructions">
+        <h2>Шаблон карточек рассадки</h2>
+        <p>Откройте этот файл в браузере (Chrome/Safari).<br>Имена гостей задаются внизу файла в списке <code>GUESTS</code>. По кнопке печати сформируется макет A4 (4 карточки на лист).</p>
+        <button class="print-btn" onclick="window.print()">Распечатать (Ctrl+P)</button>
+    </div>
+
+    <div class="cards-container">
+        <div id="pages-root"></div>
+    </div>
+
+    <script>
+        // Впишите сюда 20 имён гостей (каждое имя отдельной строкой в массиве)
+        const GUESTS = [
+            "Жених",
+            "Невеста",
+            "Гульфия",
+            "Рамиль",
+            "Гульчира",
+            "Раиль",
+            "Элина",
+            "Мария",
+            "Евгений",
+            "Эльвина",
+            "Ильнур",
+            "Вероника",
+            "Елена",
+            "Даниэль",
+            "Ралина",
+            "Галина",
+            "Валентина",
+            "Алина",
+            "Артур",
+            "Сабина",
+            "Максим"
+        ];
+
+        const sealHtml = `Т&nbsp;&nbsp;<span class="amp">&</span>А`;
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function cardHtml(guestName) {
+            return `
+                <div class="seating-card">
+                    <div class="fold-area"></div>
+                    <div class="content-area">
+                        <div class="guest-name">${escapeHtml(guestName)}</div>
+                        <div class="wedding-seal" aria-label="Именной знак свадьбы"><span>${sealHtml}</span></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function chunk(arr, size) {
+            const res = [];
+            for (let i = 0; i < arr.length; i += size) res.push(arr.slice(i, i + size));
+            return res;
+        }
+
+        function render() {
+            const root = document.getElementById("pages-root");
+            if (!root) return;
+
+            const pages = chunk(GUESTS, 4);
+            root.innerHTML = pages.map(pageGuests => {
+                const cards = pageGuests.map(cardHtml).join("");
+                return `<div class="print-page">${cards}</div>`;
+            }).join("");
+        }
+
+        render();
+    </script>
+
+</body>
+</html>
